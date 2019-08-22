@@ -1,0 +1,23 @@
+{
+  "name": "leo",
+  "version": "0.0.1",
+  "description": "taro 框架简化版",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canfoo/leo.git"
+  },
+  "keywords": [
+    "taro",
+    "wx"
+  ],
+  "author": "canfoo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/canfoo/leo/issues"
+  },
+  "homepage": "https://github.com/canfoo/leo#readme"
+}
