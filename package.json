@@ -1,10 +1,11 @@
 {
-  "name": "leo",
+  "name": "leo-app",
   "version": "0.0.1",
   "description": "taro 框架简化版",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:weapp": "node ./packages/leo-cli/bin/leo.js build --type weapp"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/canfoo/leo/issues"
   },
-  "homepage": "https://github.com/canfoo/leo#readme"
+  "homepage": "https://github.com/canfoo/leo#readme",
+  "devDependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^3.0.0",
+    "fs-extra": "^8.1.0",
+    "lodash": "^4.17.15"
+  }
 }
