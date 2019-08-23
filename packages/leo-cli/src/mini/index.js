@@ -4,6 +4,8 @@ const { setBuildData, getBuildData } = require('./helper')
 const { BUILD_TYPES, processTypeEnum } = require('../util/constants')
 const { printLog } = require('../util/index')
 
+const { buildEntry } = require('./entry')
+
 function buildProjectConfig() {
   const { buildAdapter, sourceDir, outputDir, outputDirName, appPath } = getBuildData()
   let projectConfigFileName = `project.${buildAdapter}.json`
@@ -29,7 +31,8 @@ function buildProjectConfig() {
 exports.build = (appPath, { adapter }) => {
   const buildData = setBuildData(appPath, adapter)
   fs.ensureDirSync(buildData.outputDir) // 创建dist 目录
-  // console.log('buildData', buildData)
 
   buildProjectConfig()
+  await buildEntry()
+
 }
