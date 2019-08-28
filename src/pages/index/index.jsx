@@ -6,7 +6,9 @@ export default class Index extends Component {
 
   constructor() {
     super()
-    this.state.arr = [1, 2, 6]
+    this.state = {
+      status: 1
+    }
   }
 
   config = {
@@ -23,16 +25,19 @@ export default class Index extends Component {
 
   componentDidHide () { }
 
+  handleClick() {
+    this.setState({
+      status: this.state.status + 1
+    })
+    console.log('click')
+  }
+
   render () {
     
     return (
       <View className='index'>
-        {
-          this.state.arr.map(item => (
-            <View key={item}>{item}</View>
-          ))
-        }
-        <Text>Hello world!</Text>
+        <Text onClick={this.handleClick}>Hello world!</Text>
+        { this.state.status }
       </View>
     )
   }

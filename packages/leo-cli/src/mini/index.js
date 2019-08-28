@@ -28,7 +28,7 @@ function buildProjectConfig() {
   printLog(processTypeEnum.GENERATE, '工具配置', `${outputDirName}/${projectConfigFileName}`)
 }
 
-exports.build = (appPath, { adapter }) => {
+exports.build = async (appPath, { adapter }) => {
   const buildData = setBuildData(appPath, adapter)
   fs.ensureDirSync(buildData.outputDir) // 创建dist 目录
 
