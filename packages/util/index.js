@@ -20,8 +20,8 @@ exports.printLog = function (type, tag, filePath) {
   }
 }
 
-const retries = (process.platform === 'win32') ? 100 : 2
-function emptyDirectory (dirPath, opts = { excludes: [] }) {
+const retries = (process.platform === 'win32') ? 100 : 1
+exports.emptyDirectory = function (dirPath, opts = { excludes: [] }) {
   if (fs.existsSync(dirPath)) {
     fs.readdirSync(dirPath).forEach(file => {
       const curPath = path.join(dirPath, file)
@@ -36,7 +36,6 @@ function emptyDirectory (dirPath, opts = { excludes: [] }) {
             }
             removed = true
           } catch (e) {
-            console.log(e)
           } finally {
             if (++i < retries) {
               continue
@@ -49,5 +48,3 @@ function emptyDirectory (dirPath, opts = { excludes: [] }) {
     })
   }
 }
-
-exports.emptyDirectory = emptyDirectory

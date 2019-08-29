@@ -23,11 +23,13 @@ exports.buildEntry = async () => {
   const transformResult = wxTransformer({
     code: entryFileCode,
     sourceDir,
+    outputDir,
     sourcePath: entryFilePath,
     outputEntryFilePath,
-    adapter: buildAdapter
+    adapter: buildAdapter,
+    isEntry: true
   })
-
+  
   let resCode = transformResult.code
 
   fs.writeFileSync(path.join(outputDir, 'app.js'), resCode)

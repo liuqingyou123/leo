@@ -14,6 +14,7 @@ module.exports = function build(appPath, buildConfig) {
   const { type, watch } = buildConfig
   const configDir = require(path.join(appPath, PROJECT_CONFIG))(_.merge)
   const outputPath = path.join(appPath, configDir.outputRoot)
+
   emptyDirectory(outputPath)
  
   switch (type) {
