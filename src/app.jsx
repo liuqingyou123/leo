@@ -1,4 +1,4 @@
-import Taro, { Component } from '@tarojs/taro'
+import Leo, { Component } from '@leojs/leo'
 import Index from './pages/index'
 
 import './app.scss'
@@ -40,4 +40,4 @@ class App extends Component {
   }
 }
 
-Taro.render(<App />, document.getElementById('app'))
+Leo.render(<App />, document.getElementById('app'))

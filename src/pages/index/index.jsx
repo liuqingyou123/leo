@@ -1,4 +1,4 @@
-import Taro, { Component } from '@tarojs/taro'
+import Leo, { Component } from '@leojs/leo'
 import { View, Text } from '@tarojs/components'
 import './index.scss'
 
