@@ -18,7 +18,7 @@ exports.buildEntry = async () => {
 
   const entryFileCode = fs.readFileSync(entryFilePath).toString()
   const outputEntryFilePath = path.join(outputDir, entryFileName)
-
+  console.log(' ')
   printLog(processTypeEnum.COMPILE, '入口文件', `${sourceDirName}/${entryFileName}`)
   const transformResult = wxTransformer({
     code: entryFileCode,
@@ -29,10 +29,13 @@ exports.buildEntry = async () => {
     adapter: buildAdapter,
     isEntry: true
   })
-  
-  let resCode = transformResult.code
 
-  fs.writeFileSync(path.join(outputDir, 'app.js'), resCode)
+  console.log(' ')
+  fs.writeFileSync(path.join(outputDir, 'app.json'), transformResult.configObj)
+  printLog(processTypeEnum.GENERATE, '入口配置', `${outputDirName}/app.json`)
+  fs.writeFileSync(path.join(outputDir, 'app.js'), transformResult.code)
   printLog(processTypeEnum.GENERATE, '入口文件', `${outputDirName}/app.js`)
-
+  fs.writeFileSync(path.join(outputDir, 'app.wxss'), transformResult.style)
+  printLog(processTypeEnum.GENERATE, '入口样式', `${outputDirName}/app.wxss`)
+  console.log(' ')
 }

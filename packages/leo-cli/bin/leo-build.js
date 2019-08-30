@@ -17,7 +17,7 @@ const { type } = program
 
 const projectConf = require(projectConfPath)(_.merge)
 console.log(chalk.green(`开始编译项目 ${chalk.bold(projectConf.projectName)}`))
-
+console.log(' ')
 
 build(appPath, {
   type

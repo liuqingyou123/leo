@@ -1,7 +1,7 @@
 import Leo, { Component } from '@leojs/leo'
 import Index from './pages/index'
 
-import './app.scss'
+import './app.css'
 
 class App extends Component {
 
