@@ -1,11 +1,11 @@
 const path = require('path')
 const fs = require('fs-extra')
-const { getBuildData } = require('./helper')
+const { getBuildData, setAppConfig } = require('./helper')
 const { printLog } = require('../../../util')
 const { processTypeEnum } = require('../../../util/constants')
 const wxTransformer = require('../../../leo-transformer-wx')
 
-exports.buildEntry = async () => {
+module.exports = async function buildEntry() {
   const {
     entryFileName,
     sourceDirName,
@@ -25,13 +25,16 @@ exports.buildEntry = async () => {
     code: entryFileCode,
     sourceDir,
     outputDir,
-    sourcePath: entryFilePath,
-    outputEntryFilePath,
-    adapter: buildAdapter,
-    isEntry: true,
-    projectConfig
+    projectConfig,
+    isEntry: true
   })
 
+  // let code = options.code
+  // let sourceDir = options.sourceDir
+  // let projectConfig = options.projectConfig
+  // let isEntry = options.isEntry
+
+  setAppConfig(JSON.parse(transformResult.configObj))
   console.log(' ')
   fs.writeFileSync(path.join(outputDir, 'app.json'), transformResult.configObj)
   printLog(processTypeEnum.GENERATE, '入口配置', `${outputDirName}/app.json`)

@@ -32,4 +32,8 @@ exports.setBuildData = (appPath, adapter) => {
   return BuildData
 }
 
+exports.setAppConfig = function (appConfig) {
+  BuildData.appConfig = appConfig
+}
+
 exports.getBuildData = () => BuildData

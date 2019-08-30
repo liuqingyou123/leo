@@ -4,7 +4,8 @@ const { setBuildData, getBuildData } = require('./helper')
 const { BUILD_TYPES, processTypeEnum } = require('../../../util/constants')
 const { printLog } = require('../../../util')
 
-const { buildEntry } = require('./entry')
+const buildEntry = require('./entry')
+const buildPages = require('./page')
 
 function buildProjectConfig() {
   const { buildAdapter, sourceDir, outputDir, outputDirName, appPath } = getBuildData()
@@ -34,5 +35,5 @@ exports.build = async (appPath, { adapter }) => {
 
   buildProjectConfig()
   await buildEntry()
-
+  await buildPages()
 }

@@ -48,10 +48,13 @@ function copyWeapp(outputDir) {
 module.exports = function transform(options) {
   let code = options.code
   let sourceDir = options.sourceDir
+  let outputDir = options.outputDir
   let projectConfig = options.projectConfig
   let isEntry = options.isEntry
 
-  copyWeapp(options.outputDir, options.weappPath)
+  if (isEntry) {
+    copyWeapp(outputDir)
+  }
 
   const ast = parse(code, { parserOpts: babylonConfig }).ast
 
