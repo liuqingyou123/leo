@@ -9,19 +9,39 @@ const wxTransformer = require('../../../leo-transformer-wx')
 function buildSinglePage(page) {
   const {
     sourceDir,
-    sourceDirName
+    outputDir,
+    sourceDirName,
+    projectConfig
   } = getBuildData()
   const pagePath = path.join(sourceDir, `${page}`)
   const pageJs = `${pagePath}.jsx`
+  const outPageDirPath = path.join(outputDir, page)
 
   printLog(processTypeEnum.COMPILE, '页面文件', `${sourceDirName}/${page}`)
   const pageJsContent = fs.readFileSync(pageJs).toString()
   // console.log('pageJsContent', pageJsContent)
-  const outputPagePath = path.dirname(pagePath)
-  const outputPageJSONPath = `${pagePath}.json`
-  const outputPageWXMLPath = `${pagePath}.wxml`
-  const outputPageWXSSPath = `${pagePath}.wxss`
+  const outputPageJSPath = `${outPageDirPath}.js`
+  const outputPageJSONPath = `${outPageDirPath}.json`
+  const outputPageWXMLPath = `${outPageDirPath}.wxml`
+  const outputPageWXSSPath = `${outPageDirPath}.wxss`
 
+  const transformResult = wxTransformer({
+    code: pageJsContent,
+    sourceDir,
+    outputDir,
+    sourceDirPath: path.dirname(pagePath),
+    projectConfig,
+    isEntry: false
+  })
+
+  fs.ensureDirSync(path.dirname(outputPageJSPath))
+
+  fs.writeFileSync(outputPageJSONPath, transformResult.configObj)
+  printLog(processTypeEnum.GENERATE, '页面配置', `${projectConfig.outputRoot}/${page}.json`)
+  fs.writeFileSync(outputPageJSPath, transformResult.code)
+  printLog(processTypeEnum.GENERATE, '页面逻辑', `${projectConfig.outputRoot}/${page}.js`)
+  fs.writeFileSync(outputPageWXSSPath, transformResult.style)
+  printLog(processTypeEnum.GENERATE, '页面样式', `${projectConfig.outputRoot}/${page}.wxss`)
 }
 
 module.exports = async function buildPages() {

@@ -29,11 +29,6 @@ module.exports = async function buildEntry() {
     isEntry: true
   })
 
-  // let code = options.code
-  // let sourceDir = options.sourceDir
-  // let projectConfig = options.projectConfig
-  // let isEntry = options.isEntry
-
   setAppConfig(JSON.parse(transformResult.configObj))
   console.log(' ')
   fs.writeFileSync(path.join(outputDir, 'app.json'), transformResult.configObj)

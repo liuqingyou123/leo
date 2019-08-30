@@ -49,6 +49,7 @@ module.exports = function transform(options) {
   let code = options.code
   let sourceDir = options.sourceDir
   let outputDir = options.outputDir
+  let sourceDirPath = options.sourceDirPath
   let projectConfig = options.projectConfig
   let isEntry = options.isEntry
 
@@ -77,7 +78,11 @@ module.exports = function transform(options) {
     ClassProperty (path) {
       const keyName = path.node.key.name
       if (keyName === 'config') {
-        configObj = JSON.stringify(eval('(' + generate(path.node.value).code+ ')'), null, 2)
+        let config = eval('(' + generate(path.node.value).code+ ')')
+        if (!isEntry) {
+          config.usingComponents = {}
+        }
+        configObj = JSON.stringify(config, null, 2)
       }
     },
     ImportDeclaration (path) {
@@ -91,17 +96,17 @@ module.exports = function transform(options) {
         }
       })
       if (source === LEO_PACKAGE_NAME) {
-        path.node.source.value = WEAPPPAH
+        path.node.source.value = isEntry ? WEAPPPAH : WEPAGEPARH
       }
       if (/css$/.test(source)) {
-        let cssPath = nodePath.join(sourceDir, source)
+        let cssPath = nodePath.join(isEntry ? sourceDir : sourceDirPath, source)
         style = compileStyle(cssPath, projectConfig)
         path.remove()
       }
     },
     CallExpression(path) {
       const callee = path.node.callee
-      if (callee.object.name === LEO_NAME && callee.property.name === 'render') {
+      if (callee.object && callee.object.name === LEO_NAME && callee.property.name === 'render') {
         path.remove()  // 移除 Leo.render(<App />, document.getElementById('app'));
       }
     },

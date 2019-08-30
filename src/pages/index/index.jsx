@@ -35,7 +35,7 @@ export default class Index extends Component {
   render () {
     
     return (
-      <View className='index'>
+      <View className='container'>
         <Text onClick={this.handleClick}>Hello world!</Text>
         { this.state.status }
       </View>
