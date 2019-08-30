@@ -1,10 +1,16 @@
-const path = require('path')
 const fs = require('fs-extra')
-const _ = require('lodash')
-const postcss = require('postcss').default
-const pxtransform = require('postcss-pxtransform').default
+const postcss = require('postcss')
+const pxtransform = require('postcss-pxtransform')
 
-module.exports = function compileStyle(path) {
-  let content = fs.readFileSync(path).toString()
-  return content
+module.exports = function compileStyle(path, config) {
+  let css = fs.readFileSync(path).toString()
+  let result = postcss([pxtransform(
+    {
+      platform: 'weapp',
+      deviceRatio: config.deviceRatio,
+      enable: true,
+      config: {}
+    }
+  )]).process(css)
+  return result.css
 }

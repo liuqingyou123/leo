@@ -48,7 +48,8 @@ function copyWeapp(outputDir) {
 module.exports = function transform(options) {
   let code = options.code
   let sourceDir = options.sourceDir
-  const isEntry = options.isEntry
+  let projectConfig = options.projectConfig
+  let isEntry = options.isEntry
 
   copyWeapp(options.outputDir, options.weappPath)
 
@@ -91,7 +92,7 @@ module.exports = function transform(options) {
       }
       if (/css$/.test(source)) {
         let cssPath = nodePath.join(sourceDir, source)
-        style = compileStyle(cssPath)
+        style = compileStyle(cssPath, projectConfig)
         path.remove()
       }
     },

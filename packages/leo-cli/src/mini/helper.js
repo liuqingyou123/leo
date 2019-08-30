@@ -25,6 +25,7 @@ exports.setBuildData = (appPath, adapter) => {
     outputDir,
     entryFilePath,
     entryFileName,
+    projectConfig,
     buildAdapter: adapter
   }
 

@@ -13,7 +13,8 @@ exports.buildEntry = async () => {
     sourceDir,
     outputDir,
     outputDirName,
-    buildAdapter
+    buildAdapter,
+    projectConfig
   } = getBuildData()
 
   const entryFileCode = fs.readFileSync(entryFilePath).toString()
@@ -27,7 +28,8 @@ exports.buildEntry = async () => {
     sourcePath: entryFilePath,
     outputEntryFilePath,
     adapter: buildAdapter,
-    isEntry: true
+    isEntry: true,
+    projectConfig
   })
 
   console.log(' ')
