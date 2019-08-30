@@ -1,8 +1,8 @@
 const path = require('path')
 const fs = require('fs-extra')
 const { getBuildData } = require('./helper')
-const { printLog } = require('../util/index')
-const { processTypeEnum } = require('../util/constants')
+const { printLog } = require('../../../util')
+const { processTypeEnum } = require('../../../util/constants')
 const wxTransformer = require('../../../leo-transformer-wx')
 
 exports.buildEntry = async () => {

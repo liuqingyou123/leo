@@ -1,7 +1,7 @@
 const path = require('path')
 const _ = require('lodash')
-const { BUILD_TYPES, PROJECT_CONFIG } = require('./util/constants')
-const { emptyDirectory } = require('./util/index')
+const { BUILD_TYPES, PROJECT_CONFIG } = require('../../util/constants')
+const { emptyDirectory } = require('../../util')
 
 function buildForWeapp (appPath, { watch }) {
   require('./mini').build(appPath, {

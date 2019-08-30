@@ -1,7 +1,7 @@
 
 const path = require('path')
 const _ = require('lodash')
-const { PROJECT_CONFIG } = require('../util/constants')
+const { PROJECT_CONFIG } = require('../../../util/constants')
 
 let ENTRY = 'app.jsx'
 let BuildData = {}

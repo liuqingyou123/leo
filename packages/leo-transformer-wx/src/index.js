@@ -7,6 +7,7 @@ const template = require('babel-template')
 const t = require('babel-types')
 const { processTypeEnum } = require('../../util/constants')
 const { printLog } = require('../../util')
+const compileStyle = require('./compileStyle')
 
 const nodePath = path
 const parse = babelCore.transform
@@ -90,7 +91,7 @@ module.exports = function transform(options) {
       }
       if (/css$/.test(source)) {
         let cssPath = nodePath.join(sourceDir, source)
-        style = fs.readFileSync(cssPath).toString()
+        style = compileStyle(cssPath)
         path.remove()
       }
     },

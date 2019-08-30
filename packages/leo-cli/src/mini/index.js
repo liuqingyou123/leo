@@ -1,8 +1,8 @@
 const path = require('path')
 const fs = require('fs-extra')
 const { setBuildData, getBuildData } = require('./helper')
-const { BUILD_TYPES, processTypeEnum } = require('../util/constants')
-const { printLog } = require('../util/index')
+const { BUILD_TYPES, processTypeEnum } = require('../../../util/constants')
+const { printLog } = require('../../../util')
 
 const { buildEntry } = require('./entry')
 

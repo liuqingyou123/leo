@@ -3,7 +3,7 @@ const program = require('commander')
 const chalk = require('chalk')
 const _ = require('lodash')
 const build = require('../src/build')
-const { PROJECT_CONFIG } = require('../src/util/constants')
+const { PROJECT_CONFIG } = require('../../util/constants')
 
 const appPath = process.cwd()
 const projectConfPath = path.join(appPath, PROJECT_CONFIG)
