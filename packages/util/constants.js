@@ -7,6 +7,8 @@ exports.BUILD_TYPES  = {
   H5: 'h5'
 }
 
+exports.IS_LEO_READY = '$leoCompReady'
+
 const processTypeEnum = {
   START: 'start',
   CREATE: 'create',
