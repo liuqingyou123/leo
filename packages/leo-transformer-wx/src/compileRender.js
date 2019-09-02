@@ -6,11 +6,21 @@ const t = require('babel-types')
 const { buildBlockElement } = require('../../util')
 const { IS_LEO_READY } = require('../../util/constants')
 
+
+function generateJSXAttr (ast) {
+  const code = generate(ast).code
+  return code.replace(/(this\.props\.)|(this\.state\.)/g, '')
+    .replace(/(props\.)|(state\.)/g, '')
+    .replace(/this\./g, '')
+}
+
 function parseJSXElement(element) {
   const children = element.children
   const { attributes, name } = element.openingElement
   const componentName = name.name
   let attributesTrans = {}
+
+
 }
 
 module.exports = function compileRender (renderPath, initState) {
@@ -39,6 +49,7 @@ module.exports = function compileRender (renderPath, initState) {
         path.node.name.name = 'class'
       }
       if (attributeName === 'onClick' && t.isJSXExpressionContainer(value)) {
+        console.log('123', generateJSXAttr(value))
         path.node.name.name = 'bindtap'
       }
     }
