@@ -40,6 +40,8 @@ function buildSinglePage(page) {
   printLog(processTypeEnum.GENERATE, '页面配置', `${projectConfig.outputRoot}/${page}.json`)
   fs.writeFileSync(outputPageJSPath, transformResult.code)
   printLog(processTypeEnum.GENERATE, '页面逻辑', `${projectConfig.outputRoot}/${page}.js`)
+  fs.writeFileSync(outputPageWXMLPath, transformResult.wxml)
+  printLog(processTypeEnum.GENERATE, '页面模板', `${projectConfig.outputRoot}/${page}.wxml`)
   fs.writeFileSync(outputPageWXSSPath, transformResult.style)
   printLog(processTypeEnum.GENERATE, '页面样式', `${projectConfig.outputRoot}/${page}.wxss`)
 }

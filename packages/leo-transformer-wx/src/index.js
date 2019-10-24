@@ -139,6 +139,7 @@ module.exports = function transform(options) {
     },
     Program: {
       exit (astPath) {
+        mainClass.scope.rename('Component', '__BaseComponent')
         astPath.traverse({
           ClassDeclaration (path) {
             const node = path.node
@@ -170,13 +171,20 @@ module.exports = function transform(options) {
     }
   })
 
-  mainClass.scope.rename('Component', '__BaseComponent')
-  outTemplate = compileRender(renderPath, initState)
+  outTemplate = compileRender(renderPath)
+
+  renderPath.traverse({
+    BlockStatement (path) {
+      path.node.body = []
+      path.node.body.push(template('this.__state = arguments[0] || this.state || {};', babylonConfig)())
+    }
+  })
 
   code = generate(ast).code
-  // console.log('code', code)
+
   result.code = code
   result.configObj = configObj
+  result.wxml = outTemplate
   result.style = style
 
   return result
