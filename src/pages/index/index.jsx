@@ -2,12 +2,12 @@ import Leo, { Component } from '@leojs/leo'
 import { View, Text } from '@leojs/components'
 import './index.css'
 
-export default class Index extends Component {
+class Index extends Component {
 
   constructor() {
     super()
     this.state = {
-      status: 1
+      status: 10
     }
   }
 
@@ -42,3 +42,4 @@ export default class Index extends Component {
     )
   }
 }
+

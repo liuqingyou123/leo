@@ -1,5 +1,4 @@
 import Leo, { Component } from '@leojs/leo'
-import Index from './pages/index'
 
 import './app.css'
 

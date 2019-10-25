@@ -10,6 +10,7 @@ const { printLog } = require('../../util')
 const { babylonConfig } = require('./config')
 const compileStyle = require('./compileStyle')
 const compileRender = require('./compileRender')
+const babel = require('../../util/babel')
 
 const nodePath = path
 const parse = babelCore.transform
@@ -25,11 +26,12 @@ const CREATE_DATA = '_createData'
  * 
  * @param {*} outputDir
  */
-function copyWeapp(outputDir) {
-  const fileContent = fs.readFileSync(path.join(__dirname, '../../leo-weapp/index.js')).toString()
+async function copyWeapp(outputDir) {
+  let fileContent = fs.readFileSync(path.join(__dirname, '../../leo-weapp/index.js')).toString()
   const outputNpmPath = path.join(outputDir, WEAPPPAH)
+  let resCode = await babel(fileContent, outputNpmPath)
   fs.ensureDirSync(path.dirname(outputNpmPath))
-  fs.writeFileSync(outputNpmPath, fileContent)
+  fs.writeFileSync(outputNpmPath, resCode.code)
   printLog(processTypeEnum.COPY, 'NPM文件', outputNpmPath)
 }
 
@@ -146,9 +148,9 @@ module.exports = function transform(options) {
                 }
                 astPath.node.body.push(template(`export default ${className}`, babylonConfig)())
                 if (isEntry) {
-                  astPath.node.body.push(template(`App(require('${WEAPPPAH}').default.createApp(${className}))`, babylonConfig)())
+                  astPath.node.body.push(template(`App(require('${WEAPPPAH}').createApp(${className}))`, babylonConfig)())
                 } else {
-                  astPath.node.body.push(template(`Component(require('${WEPAGEPARH}').default.createApp(${className}))`, babylonConfig)())
+                  astPath.node.body.push(template(`Component(require('${WEPAGEPARH}').createComponent(${className}))`, babylonConfig)())
                 }
               }
             }

@@ -4,6 +4,7 @@ const { getBuildData, setAppConfig } = require('./helper')
 const { printLog } = require('../../../util')
 const { processTypeEnum } = require('../../../util/constants')
 const wxTransformer = require('../../../leo-transformer-wx')
+const babel = require('../../../util/babel')
 
 module.exports = async function buildEntry() {
   const {
@@ -31,6 +32,9 @@ module.exports = async function buildEntry() {
 
   setAppConfig(JSON.parse(transformResult.configObj))
   console.log(' ')
+
+  let resCode = await babel(transformResult.code, path.join(outputDir, 'app.js'))
+  transformResult.code = resCode.code
   fs.writeFileSync(path.join(outputDir, 'app.json'), transformResult.configObj)
   printLog(processTypeEnum.GENERATE, '入口配置', `${outputDirName}/app.json`)
   fs.writeFileSync(path.join(outputDir, 'app.js'), transformResult.code)

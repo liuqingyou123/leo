@@ -1,11 +1,11 @@
 class BaseComponent {
-  __isReady = false
-
   constructor () {
+    this.__isReady = false
     this.state = {}
   }
   setState(state) {
-    doUpdate(this.$component, state)
+    console.log('this.$component', this)
+    doUpdate(this.$scope, state)
   }
   _init (scope) {
     this.$scope = scope
@@ -39,20 +39,20 @@ function createApp(AppClass) {
   return Object.assign(weappAppConf, app)
 }
 
-function doUpdate(component, state) {
+function doUpdate($scope, state) {
   let data = state || {}
-  data['$taroCompReady'] = true
-  component.$scope.setData(data)
+  data['$leoCompReady'] = true
+  $scope.setData(data)
 }
 
 function initComponent() {
   if (this.$component.__isReady) return
   this.$component.__isReady = true
-  doUpdate(this.$component, this.$component.state)
+  doUpdate(this.$component.$scope, this.$component.state)
 }
 
 function componentTrigger(component, key) {
-  component[key] && typeof component[key] === 'function' && component[key].call(component, ...args)
+  component[key] && typeof component[key] === 'function' && component[key].call(component)
 }
 
 function bindEvents (weappComponentConf, events) {
@@ -60,9 +60,9 @@ function bindEvents (weappComponentConf, events) {
   const target = weappComponentConf.methods
   events.forEach(eventHandlerName => {
     if (target[eventHandlerName]) return
-    target[eventHandlerName] = function() {
-      this.$component[eventHandlerName].call(callScope)
-    }
+      target[eventHandlerName] = function() {
+        this.$component[eventHandlerName].call(this.$component)
+      }
   })
 }
 
@@ -97,7 +97,7 @@ function createComponent(ComponentClass) {
   return weappComponentConf
 }
 
-module.exports = {
+module.exports = module.exports.default = {
   Component: BaseComponent,
   createApp,
   createComponent

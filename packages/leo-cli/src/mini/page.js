@@ -4,9 +4,9 @@ const { getBuildData } = require('./helper')
 const { printLog } = require('../../../util')
 const { processTypeEnum } = require('../../../util/constants')
 const wxTransformer = require('../../../leo-transformer-wx')
+const babel = require('../../../util/babel')
 
-
-function buildSinglePage(page) {
+async function buildSinglePage(page) {
   const {
     sourceDir,
     outputDir,
@@ -36,6 +36,8 @@ function buildSinglePage(page) {
 
   fs.ensureDirSync(path.dirname(outputPageJSPath))
 
+  let resCode = await babel(transformResult.code, outputPageJSPath)
+  transformResult.code = resCode.code
   fs.writeFileSync(outputPageJSONPath, transformResult.configObj)
   printLog(processTypeEnum.GENERATE, '页面配置', `${projectConfig.outputRoot}/${page}.json`)
   fs.writeFileSync(outputPageJSPath, transformResult.code)
