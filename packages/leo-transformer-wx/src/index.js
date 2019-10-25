@@ -7,6 +7,7 @@ const template = require('babel-template')
 const t = require('babel-types')
 const { processTypeEnum } = require('../../util/constants')
 const { printLog } = require('../../util')
+const { babylonConfig } = require('./config')
 const compileStyle = require('./compileStyle')
 const compileRender = require('./compileRender')
 
@@ -14,24 +15,10 @@ const nodePath = path
 const parse = babelCore.transform
 const LEO_NAME = 'Leo'
 const LEO_PACKAGE_NAME = '@leojs/leo'
+const LEO_COMPONENTS_NAME = '@leojs/components'
 const WEAPPPAH = './npm/leo/index.js'
 const WEPAGEPARH = '../../npm/leo/index.js'
 const CREATE_DATA = '_createData'
-const babylonConfig = {
-  sourceType: 'module',
-  plugins: [
-    'typescript',
-    'classProperties',
-    'jsx',
-    'trailingFunctionCommas',
-    'asyncFunctions',
-    'exponentiationOperator',
-    'asyncGenerators',
-    'objectRestSpread',
-    'decorators',
-    'dynamicImport'
-  ]
-}
 
 /**
  * 复制leo-weapp文件至dist目录
@@ -172,11 +159,13 @@ module.exports = function transform(options) {
   })
 
   outTemplate = compileRender(renderPath)
+  ast.program.body = ast.program.body.filter(item => !(t.isImportDeclaration(item) && item.source.value === LEO_COMPONENTS_NAME))
+  
 
   renderPath.traverse({
     BlockStatement (path) {
       path.node.body = []
-      path.node.body.push(template('this.__state = arguments[0] || this.state || {};', babylonConfig)())
+      path.node.body.unshift(template('this.__state = arguments[0] || this.state || {};', babylonConfig)())
     }
   })
 

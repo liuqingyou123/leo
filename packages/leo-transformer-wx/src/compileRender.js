@@ -1,9 +1,11 @@
 const generate = require('babel-generator').default
-const { kebabCase } = require('lodash') 
+const { kebabCase, uniq } = require('lodash') 
 const t = require('babel-types')
 const template = require('babel-template')
-const { buildBlockElement } = require('../../util')
+const { buildBlockElement, findMethodName } = require('../../util')
+const { babylonConfig } = require('./config')
 const { IS_LEO_READY } = require('../../util/constants')
+let usedEvents = new Set()
 
 function stringifyAttributes (input) {
   const attributes = []
@@ -122,6 +124,20 @@ function parseJSXElement(element) {
   return eLe
 }
 
+function setCustomEvent (renderPath) {
+  const classPath = renderPath.findParent(p => p.isClassExpression() || p.isClassDeclaration())
+  const eventPropName = '$$events'
+  const body = classPath.node.body.body.find(b => t.isClassProperty(b) && b.key.name === eventPropName)
+  const _usedEvents = Array.from(usedEvents).map(s => t.stringLiteral(s))
+  if (body && t.isArrayExpression(body.value)) {
+    body.value = t.arrayExpression(uniq(body.value.elements.concat(_usedEvents)))
+  } else {
+    let classProp = t.classProperty(t.identifier(eventPropName), t.arrayExpression(_usedEvents))
+    classProp.static = true
+    classPath.node.body.body.unshift(classProp)
+  }
+}
+
 module.exports = function compileRender (renderPath) {
   let finalReturnElement = null
   let outputTemplate = null
@@ -134,6 +150,8 @@ module.exports = function compileRender (renderPath) {
         path.node.name.name = 'class'
       }
       if (attributeName === 'onClick' && t.isJSXExpressionContainer(value)) {
+        const methodName = findMethodName(path.node.value.expression)
+        methodName && usedEvents.add(methodName)
         path.node.name.name = 'bindtap'
       }
     }
@@ -154,5 +172,14 @@ module.exports = function compileRender (renderPath) {
       }
     }
   })
+  renderPath.traverse({
+    BlockStatement (path) {
+      path.node.body = []
+      path.node.body.unshift(template('this.__state = arguments[0] || this.state || {};', babylonConfig)())
+    }
+  })
+
+  setCustomEvent(renderPath)
+
   return outputTemplate
 }

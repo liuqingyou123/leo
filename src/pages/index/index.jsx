@@ -1,5 +1,5 @@
 import Leo, { Component } from '@leojs/leo'
-import { View, Text } from '@tarojs/components'
+import { View, Text } from '@leojs/components'
 import './index.css'
 
 export default class Index extends Component {
