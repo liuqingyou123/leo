@@ -4,7 +4,6 @@
   "description": "taro 框架简化版",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build:weapp": "node ./packages/leo-cli/bin/leo.js build --type weapp"
   },
   "repository": {
