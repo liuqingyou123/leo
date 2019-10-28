@@ -5,7 +5,7 @@ class BaseComponent {
   }
   setState(state) {
     console.log('this.$component', this)
-    doUpdate(this.$scope, state)
+    doUpdate(this.$scope.$component, state)
   }
   _init (scope) {
     this.$scope = scope
@@ -39,16 +39,17 @@ function createApp(AppClass) {
   return Object.assign(weappAppConf, app)
 }
 
-function doUpdate($scope, state) {
+function doUpdate($component, state) {
   let data = state || {}
   data['$leoCompReady'] = true
-  $scope.setData(data)
+  $component.state = data
+  $component.$scope.setData(data)
 }
 
 function initComponent() {
   if (this.$component.__isReady) return
   this.$component.__isReady = true
-  doUpdate(this.$component.$scope, this.$component.state)
+  doUpdate(this.$component, this.$component.state)
 }
 
 function componentTrigger(component, key) {
@@ -97,7 +98,7 @@ function createComponent(ComponentClass) {
   return weappComponentConf
 }
 
-module.exports = module.exports.default = {
+module.exports = {
   Component: BaseComponent,
   createApp,
   createComponent
