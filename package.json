@@ -1,0 +1,42 @@
+{
+  "name": "leo-app",
+  "version": "0.0.1",
+  "description": "taro 框架简化版",
+  "main": "index.js",
+  "scripts": {
+    "build:weapp": "node ./packages/leo-cli/bin/leo.js build --type weapp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canfoo/leo.git"
+  },
+  "keywords": [
+    "taro",
+    "wx"
+  ],
+  "author": "canfoo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/canfoo/leo/issues"
+  },
+  "homepage": "https://github.com/canfoo/leo#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-generator": "^6.26.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-jsx-stylesheet": "^0.6.8",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-template": "^6.26.0",
+    "babel-traverse": "^6.26.0",
+    "babel-types": "^6.26.0",
+    "chalk": "^2.4.2",
+    "commander": "^3.0.0",
+    "fs-extra": "^8.1.0",
+    "lodash": "^4.17.15",
+    "postcss": "^6.0.22",
+    "postcss-pxtransform": "^1.3.13"
+  }
+}
