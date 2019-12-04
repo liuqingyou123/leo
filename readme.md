@@ -23,10 +23,10 @@ npm run build:weapp
 ## 演示（取自本项目代码）
 
 源码（react 语法）
-<img src="./screenshot/code.jpg" style="width: 240px">
+<img src="./screenshot/code.jpg" width="240" >
 
 编译过程
-<img src="./screenshot/build.jpg" style="width: 300px">
+<img src="./screenshot/build.jpg" width="300">
 
 效果
-<img src="./screenshot/demo.gif" style="width: 240px">
+<img src="./screenshot/demo.gif" swidth="240">
