@@ -1,6 +1,6 @@
 # LEO
 
-taro的简化版（实现 react -> wx 的转换）
+taro的简化版（实现 react -> weapp 的转换）
 
 
 # 如何使用
