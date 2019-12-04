@@ -24,11 +24,11 @@ npm run build:weapp
 
 源码（react 语法）
 
-<img src="./screenshot/code.jpg" width="240" >
+<img src="./screenshot/code.jpg" width="280" >
 
 编译过程
 
-<img src="./screenshot/build.jpg" width="320">
+<img src="./screenshot/build.jpg" width="380">
 
 效果
 
