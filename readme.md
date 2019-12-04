@@ -5,7 +5,7 @@
 > Leo，雷欧奥特曼，泰罗·奥特曼（Taro）的弟弟。
 
 ## 简介
-本项目在阅读完[taro](https://github.com/NervJS/taro)相关源码后，仿照taro实现了一个简化版taro，主要实现react语法转换为微信小程序语法的功能，目的是让让大家可以用最简单代码了解taro的设计原理。 😊
+本项目在阅读完[taro](https://github.com/NervJS/taro)相关源码后，仿照taro实现了一个简化版taro，主要实现react语法转换为微信小程序语法的功能，目的就是让大家可以用最简单代码了解taro的设计原理 😊。因此本项目只是纯学习之用，并不能投入实际项目使用。
 
 
 ## 如何使用
