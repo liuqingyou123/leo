@@ -18,7 +18,7 @@ class Index extends Component {
   componentWillMount () { }
 
   componentDidMount () {
-    console.log(111)
+    console.log('加载')
   }
 
   componentWillUnmount () { }
@@ -38,8 +38,12 @@ class Index extends Component {
     
     return (
       <View className='container'>
-        <Text onClick={this.handleClick}>Hello world!</Text>
-        { this.state.status }
+        <View className="btn">
+          <Text onClick={this.handleClick}>加1</Text>
+        </View>
+        <View className="num">
+          <Text>num：{ this.state.status }</Text>
+        </View>
       </View>
     )
   }
