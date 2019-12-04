@@ -2,10 +2,11 @@
 
 > Leo，雷欧奥特曼，泰罗·奥特曼（Taro）的弟弟。
 
-taro的简化版（实现 react -> weapp 的转换）
+## 简介
+taro的简化版（实现 react -> weapp 的转换）。
 
 
-# 如何使用
+## 如何使用
 安装
 
 ```
@@ -19,3 +20,13 @@ npm run build:weapp
 
 编译完成直接用小程序开发工具打开dist目录即可
 
+## 演示（取自本项目代码）
+
+源码（react 语法）
+<img src="./screenshot/code.jpg" style="width: 240px">
+
+编译过程
+<img src="./screenshot/build.jpg" style="width: 300px">
+
+效果
+<img src="./screenshot/demo.gif" style="width: 240px">
