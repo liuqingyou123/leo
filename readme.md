@@ -1,4 +1,6 @@
-# LEO
+# Leo
+
+> Leo，雷欧奥特曼，泰罗·奥特曼（Taro）的弟弟。
 
 taro的简化版（实现 react -> weapp 的转换）
 
