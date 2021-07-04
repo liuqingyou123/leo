@@ -24,8 +24,8 @@ class Index extends Component {
   render () {
     return (
       <View className='container'>
-        <View className="btn">
-          <Text onClick={this.handleClick}>加1</Text>
+        <View onClick={this.handleClick} className="btn">
+          <Text>加1</Text>
         </View>
         <View className="num">
           <Text>num：{ this.state.status }</Text>
